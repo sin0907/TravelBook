@@ -1,0 +1,14 @@
+h1{
+  font-size: 30px;
+  font-style: initial;
+  color:#003366;
+  text-align:center;
+}
+
+h1>a{
+  text-decoration: none ;
+}
+ 
+main>h2{
+  color: #003366;
+}

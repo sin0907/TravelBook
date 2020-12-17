@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link th:href="@{/css}" rel="stylesheet">
+</head>
+<body>
+	<h1>新規会員登録</h1>
+	<form method="post" action="/travel" th:object="${formModel}">
+		<labeL>名前</labeL><input type="text" name="name">
+		<labeL>メール</labeL><input type="text" name="mail">
+		<labeL>パスワード</labeL><input type="pass" name="pass">
+		<input type="submit" value="登録">
+	</form>
+	<table>
+	<tr><th>名前</th><th>メールアドレス</th><th>パスワード</th></tr>
+		<tr th:each="c : ${customers}">
+		<td th:text="${c.name}"></td>
+		<td th:text="${c.mail}"></td>
+		<td th:text="${c.pass}"></td>
+		</tr>
+	</table>
+</body>
+</html>
