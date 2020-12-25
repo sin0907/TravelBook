@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,15 +16,16 @@ public class TravelHomeData {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO) 
 	@Column
 	private long id;
-	
-	@Column
-	private long user_id;
 		
 	@Column()
 	private String date;
 	
 	@Column(length = 50, nullable = false)
 	private String comment;
+	
+	@ManyToOne
+//	@JoinColumn(name="user_id")
+	private TravelData traveldata;
 	
 	public long getId(){ return id; }
 	public void setId(long id) { this.id = id; }
@@ -32,5 +35,13 @@ public class TravelHomeData {
 	
 	public String getComment(){ return comment; }
 	public void setComment(String comment) { this.comment = comment; }
+	
+	public TravelData getTravelData() {
+        return traveldata;
+    }
+
+    public void setTravelData(TravelData traveldata) {
+        this.traveldata = traveldata;
+    }
 	
 }

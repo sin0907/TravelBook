@@ -3,9 +3,16 @@ package com.example.demo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,9 +43,7 @@ public class MainController {
 	@RequestMapping(value="/travelhome", method = RequestMethod.GET)
 	public ModelAndView travelhomeGet(ModelAndView mv){
 	List<TravelHomeData> tweet = repository1.findAll();
-	List<TravelData> customers = repository.findAll();
 	mv.addObject("tweet", tweet);
-	mv.addObject("customers", customers);
 	mv.setViewName("travelhome");
 	return mv;
 	}
@@ -49,8 +54,13 @@ public class MainController {
 	SimpleDateFormat format = new SimpleDateFormat( "yyyy/MM/dd HH:mm:ss" );  
 	String display = format.format( dateObj );
 	String date=display;
-	TravelHomeData.setDate(date);
+	TravelHomeData.setDate(date);			
 	repository1.saveAndFlush(TravelHomeData);
+	
+	TravelData user = repository.findOne(id);
+	TravelHomeData traveldata = new TravelHomeData();
+	traveldata.setTravelData(user);
+	repository1.save(user);
 	return new ModelAndView("redirect:/travelhome");
 	}
 //	ログインページ
@@ -64,4 +74,6 @@ public class MainController {
 		mv.setViewName("completion");
 		return mv;
 	}
+	
+
 }

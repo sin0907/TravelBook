@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,9 @@ public class TravelData {
 	@Column(length = 50, nullable = false)
 	private String pass;
 	
+	@OneToMany(mappedBy="traveldata", cascade=CascadeType.ALL)
+	private List<TravelHomeData> TravelHomeData;
+	
 	public long getId(){ return id; }
 	public void setId(long id) { this.id = id; }
 	
@@ -30,23 +35,12 @@ public class TravelData {
 	public String getPass(){ return pass; }
 	public void setPass(String pass) { this.pass = pass; }
 	
-//	@Column
-//	private long id0;
-//		
-//	@Column()
-//	private String date;
-//	
-//	@Column(length = 50, nullable = false)
-//	private String comment;
-//	
-//	public long getId0(){ return id0; }
-//	public void setId0(long id0) { this.id0 = id0; }
-//	
-//		
-//	public String getDate(){ return date; }
-//	public void setDate(String date) { this.date = date; }
-//	
-//	public String getComment(){ return comment; }
-//	public void setComment(String comment) { this.comment = comment; }
+	public List<TravelHomeData> getTravelHomeData() {
+	return TravelHomeData;
+	}
+
+	 public void setTravelHomeData(List<TravelHomeData> travelhomedata) {
+	 this.TravelHomeData = travelhomedata;
+	 }
 	
 }
